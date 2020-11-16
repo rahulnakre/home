@@ -1,36 +1,56 @@
 import React, { FC } from "react";
 import fs from "fs";
 import Link from "next/link";
+import { getPosts } from "../api/posts";
 
-type BlogProps = {
-  postTitles: string[]
+type GhostPost = {
+  title: string;
+  content: string;
 }
 
-const Blog:FC<BlogProps> = ({ postTitles }) => {
+type BlogProps = {
+  postTitles: string[],
+  ghostPostTitles: any;
+}
+
+const Blog:FC<BlogProps> = ({ postTitles, ghostPostTitles }) => {
   return (
     <>
     <h1>heres blog</h1>
-    {/* {postTitles} */}
-      {postTitles.map(postTitle => {
-        return (
-          <div key={postTitle}>
-            <Link  href={"/blog/" + postTitle}>
-              <a>{postTitle}</a>
-            </Link>
-          </div>
-        );
-      })}
+    {postTitles.map(postTitle => {
+      return (
+        <div key={postTitle}>
+          <Link  href={"/blog/" + postTitle}>
+            <a>{postTitle}</a>
+          </Link>
+        </div>
+      );
+    })}
+    {ghostPostTitles.map(title => {
+      return (
+        <div key={title}>
+          <Link  href={"/blog/" + title}>
+            <a>{title}</a>
+          </Link>
+        </div>
+      );
+    })}
     </>
   );
 }
 
 export const getStaticProps = async () => {
   const files: string[] = fs.readdirSync("posts");
-  const f = files.map(fileName => fileName.replace(".md", ""))
-  console.log(f)
+  const ghostPosts: GhostPost[] = await getPosts();
+
+  const ghostPostTitles = ghostPosts.map((ghostPost) => ghostPost.title);
+
+  console.log(ghostPostTitles)
+
   return {
     props: {
-      postTitles: files.map(fileName => fileName.replace(".md", ""))
+      postTitles: files.map(fileName => fileName.replace(".md", "")),
+      ghostPostTitles: ghostPostTitles 
     }
   }
 }
