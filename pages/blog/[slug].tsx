@@ -1,70 +1,53 @@
 import React, { FC } from "react"
-import fs from "fs"; // a node lib, but its fine
-import path from "path";
-import matter from "gray-matter"; // to extract metadata from .md
 import Head from "next/head";
-import marked from "marked";
 import { getSinglePost } from "../api/posts";
+import { useRouter } from "next/router";
 
 type PostProps = {
   htmlString: string,
   data: {
     [key: string]: any
   },
-  ghostPost: {
-    html: any
-  }
+  ghostPost: GhostPost;
 }
 
-const Post:FC<PostProps> = ({ htmlString, data, ghostPost }) => {
+type GhostPost = {
+  id: string;
+  title: string;
+  html: string;
+  slug: string;
+}
+
+const Post:FC<PostProps> = ({ ghostPost }) => {
+  const router = useRouter();
+  if (router.isFallback) {
+    return <h1>Loading...</h1>
+  }
+
   return (
     <>
       <Head>
-        <title>{data.title}</title>
-        <meta title="description" content={data.description} />
+        <title>{ghostPost.title}</title>
+        {/* <meta title="description" content={ghostPost.metaDescription} /> */}
       </Head>
+      <h1>{ghostPost.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: ghostPost.html }} />
-      {/* <div dangerouslySetInnerHTML={{ __html: htmlString }} /> */}
     </>
   );
 }
 
 export const getStaticPaths = async () => {
-
-  // const files: string[] = fs.readdirSync('posts')
-  // const paths = files.map(filename => ({
-  //   params: {
-  //     slug: filename.replace(".md", "")
-  //   }
-  // }));
-
-  // return {
-  //   paths: paths,
-  //   // build everything at build time
-  //   fallback: false,
-  // };
-
+  return {
+    paths: [],
+    fallback: true,
+  }
 }
 
-// Fetches the content of the post
-// anything in the props obj gets sent as props to our component
-// param we need to fetch data for gets sent to this function
 export const getStaticProps = async ({ params: { slug } }) => {
-  const mdWithMetadata: string = fs.readFileSync(
-    path.join('posts', slug + ".md")
-  ).toString();
-  const parsedMd: matter.GrayMatterFile<string> = matter(mdWithMetadata);
-  const htmlString: string = marked(parsedMd.content);
-
   const ghostPost = await getSinglePost(slug);
- 
-  console.log(ghostPost)
 
   return {
     props: {
-      // contents: parsedMd.content,
-      htmlString,
-      data: parsedMd.data,
       ghostPost: ghostPost,
     }
   };
