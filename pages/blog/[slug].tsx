@@ -4,42 +4,46 @@ import path from "path";
 import matter from "gray-matter"; // to extract metadata from .md
 import Head from "next/head";
 import marked from "marked";
+import { getSinglePost } from "../api/posts";
 
 type PostProps = {
   htmlString: string,
   data: {
     [key: string]: any
+  },
+  ghostPost: {
+    html: any
   }
 }
 
-const Post:FC<PostProps> = ({ htmlString, data }) => {
+const Post:FC<PostProps> = ({ htmlString, data, ghostPost }) => {
   return (
     <>
       <Head>
         <title>{data.title}</title>
         <meta title="description" content={data.description} />
       </Head>
-      <div>
-        contents below
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: htmlString }} />
+      <div dangerouslySetInnerHTML={{ __html: ghostPost.html }} />
+      {/* <div dangerouslySetInnerHTML={{ __html: htmlString }} /> */}
     </>
   );
 }
 
 export const getStaticPaths = async () => {
-  const files: string[] = fs.readdirSync('posts')
-  const paths = files.map(filename => ({
-    params: {
-      slug: filename.replace(".md", "")
-    }
-  }));
 
-  return {
-    paths: paths,
-    // build everything at build time
-    fallback: false,
-  };
+  // const files: string[] = fs.readdirSync('posts')
+  // const paths = files.map(filename => ({
+  //   params: {
+  //     slug: filename.replace(".md", "")
+  //   }
+  // }));
+
+  // return {
+  //   paths: paths,
+  //   // build everything at build time
+  //   fallback: false,
+  // };
+
 }
 
 // Fetches the content of the post
@@ -52,11 +56,16 @@ export const getStaticProps = async ({ params: { slug } }) => {
   const parsedMd: matter.GrayMatterFile<string> = matter(mdWithMetadata);
   const htmlString: string = marked(parsedMd.content);
 
+  const ghostPost = await getSinglePost(slug);
+ 
+  console.log(ghostPost)
+
   return {
     props: {
       // contents: parsedMd.content,
       htmlString,
       data: parsedMd.data,
+      ghostPost: ghostPost,
     }
   };
 }

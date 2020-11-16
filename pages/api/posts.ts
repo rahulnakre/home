@@ -1,15 +1,30 @@
 import GhostContentAPI from "@tryghost/content-api";
 
+const { GHOST_SERVER_URL, GHOST_KEY } = process.env;
+console.log("fwefwe")
+console.log(GHOST_SERVER_URL)
+
 const api = new GhostContentAPI({
-  url: "http://ec2-34-228-197-74.compute-1.amazonaws.com",
-  key: 'edf1cc6b9a31d57c73875565e4',
+  url: GHOST_SERVER_URL,
+  key: GHOST_KEY,
   version: "v3"
 });
 
 export async function getPosts() {
   return await api.posts 
     .browse({
-      limit: "all"
+      limit: "all",
+      fields: "id,title,slug,published_at,reading_time"
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
+
+export async function getSinglePost(postSlug) {
+  return await api.posts 
+    .read({
+      slug: postSlug,
     })
     .catch(err => {
       console.log(err);
