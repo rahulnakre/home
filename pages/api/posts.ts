@@ -21,22 +21,8 @@ export async function getSinglePost(postSlug) {
   return await api.posts 
     .read({
       slug: postSlug,
-      // fields: "id,title,slug,html,publishedAt,reading_time,og_image,og_title,og_description"
     })
     .catch(err => {
       console.log(err);
     });
 }
-// id: string;
-// title: string;
-// html: string;
-// publishedAt: string;
-// readingTime: string;
-// ogImage: string;
-// ogTitle: string;
-// ogDescription: string;
-// twitterImage: string;
-// twitterTitle: string;
-// twitterDescription: string;
-// metaTitle: string;
-// metaDescription: string;

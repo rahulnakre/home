@@ -2,6 +2,7 @@ import React, { FC } from "react"
 import Head from "next/head";
 import { getSinglePost } from "../api/posts";
 import { useRouter } from "next/router";
+import Container from "../../components/Container";
 
 type PostProps = {
   htmlString: string,
@@ -25,14 +26,14 @@ const Post:FC<PostProps> = ({ ghostPost }) => {
   }
 
   return (
-    <>
+    <Container>
       <Head>
         <title>{ghostPost.title}</title>
         {/* <meta title="description" content={ghostPost.metaDescription} /> */}
       </Head>
       <h1>{ghostPost.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: ghostPost.html }} />
-    </>
+    </Container>
   );
 }
 

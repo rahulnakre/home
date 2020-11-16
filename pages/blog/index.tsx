@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import { getPostInfoList } from "../api/posts";
+import Container from "../../components/Container";
 
 export type GhostPostInfo = {
   id: string;
@@ -17,7 +18,7 @@ type BlogProps = {
 
 const Blog:FC<BlogProps> = ({ ghostPostInfoList }) => {
   return (
-    <div>
+    <Container>
     {ghostPostInfoList.map(postInfo => {
       return (
         <div key={postInfo.id}>
@@ -27,7 +28,7 @@ const Blog:FC<BlogProps> = ({ ghostPostInfoList }) => {
         </div>
       );
     })}
-    </div>
+    </Container>
   );
 }
 
