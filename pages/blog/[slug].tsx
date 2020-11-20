@@ -52,7 +52,6 @@ const Post:FC<PostProps> = ({ ghostPost }) => {
           <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
             {ghostPost.title}
           </Heading>
-
         </Flex>
         <Flex
           flexDirection="column"
