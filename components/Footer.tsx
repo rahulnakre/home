@@ -1,6 +1,16 @@
 import React from 'react';
 import NextLink from 'next/link';
 import { Flex, Link, IconButton } from '@chakra-ui/react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGithub,
+  faLinkedinIn,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons"
+
+{/* <i class="far fa-sun"></i> */}
+import {} from "@fortawesome/react-fontawesome"
 
 const Footer = () => (
   <Flex align="center" mb={4} direction="column">
@@ -8,7 +18,7 @@ const Footer = () => (
       <Link href="https://twitter.com/rahul_nakree" title="Twitter" isExternal>
         <IconButton
           aria-label="Twitter"
-          icon="twitter"
+          icon={<FontAwesomeIcon icon={faTwitter} />}
           size="lg"
           color="gray.500"
           variant="ghost"
@@ -17,7 +27,7 @@ const Footer = () => (
       <Link href="https://github.com/rahulnakre" title="GitHub" isExternal>
         <IconButton
           aria-label="GitHub"
-          icon="github"
+          icon={<FontAwesomeIcon icon={faGithub} />}
           size="lg"
           color="gray.500"
           variant="ghost"
@@ -30,7 +40,7 @@ const Footer = () => (
       >
         <IconButton
           aria-label="LinkedIn"
-          icon="linkedin"
+          icon={<FontAwesomeIcon icon={faLinkedinIn} />}
           size="lg"
           color="gray.500"
           variant="ghost"
@@ -39,7 +49,7 @@ const Footer = () => (
       <Link href="mailto:rahulnakre@gmail.com" title="Email" isExternal>
         <IconButton
           aria-label="Email"
-          icon="mail"
+          icon={<FontAwesomeIcon icon={faEnvelope} />}
           size="lg"
           color="gray.500"
           variant="ghost"

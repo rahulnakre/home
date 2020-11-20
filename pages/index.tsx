@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import Header from "../components/Header"
+// import Header from "../components/Header"
 import { FC } from 'react';
 import Container from '../components/Container';
 import { useColorMode, Heading, Text, Flex, Stack } from '@chakra-ui/react';
@@ -39,7 +39,7 @@ const Home:FC<HomeProps> = () => {
           <Text color={secondaryTextColor[colorMode]}>
             I’m a developer currently working a Honeybee Hub. My interests area 
             backends for web services, infrastructure, and building products.
-            Currently studying CS @ UofT.
+            CS @ UofT.
           </Text>
         </Flex>
         <Flex
@@ -50,8 +50,9 @@ const Home:FC<HomeProps> = () => {
           mt={8}
         >
           <Heading letterSpacing="tight" mb={4} size="xl" fontWeight={700}>
-            Recent Posts
+            Interests
           </Heading>
+          I'm currently trying to learn more about infrastructure, more specifically I've been playing around with consensus algorithms and learning how containers work at a more granular level. 
           {/* Blog Posts Go here */}
         </Flex>
       </Stack>

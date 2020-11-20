@@ -3,6 +3,9 @@ import NextLink from 'next/link';
 import { useColorMode, Button, Flex, Box, IconButton } from '@chakra-ui/react';
 import Footer from './Footer';
 import styled from '@emotion/styled';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-regular-svg-icons"
+
 
 const StickyNav = styled(Flex)`
   position: sticky;
@@ -45,7 +48,11 @@ const Container = ({ children }) => {
       >
         <IconButton
           aria-label="Toggle dark mode"
-          icon={colorMode === 'dark' ? 'sun' : 'moon'}
+          icon={
+            colorMode === 'dark' ? 
+              <FontAwesomeIcon icon={faSun} /> 
+              : <FontAwesomeIcon icon={faMoon} />
+            }
           onClick={toggleColorMode}
         />
         <Box>
