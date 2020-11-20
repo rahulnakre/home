@@ -10,7 +10,8 @@ export async function getPostInfoList() {
   return await api.posts 
     .browse({
       limit: "all",
-      fields: "id,title,slug,published_at,reading_time"
+      fields: "id,title,slug,published_at,custom_excerpt",
+      // include: "excerpt"
     })
     .catch(err => {
       console.log(err);

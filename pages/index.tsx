@@ -24,7 +24,7 @@ const Home:FC<HomeProps> = () => {
         spacing={8}
         justifyContent="center"
         alignItems="flex-start"
-        m="0 auto 4rem auto"
+        margin="0 auto 4rem auto"
         maxWidth="700px"
       >
         <Flex

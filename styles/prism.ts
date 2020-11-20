@@ -109,16 +109,6 @@ const prismBaseTheme = css`
   .token.entity {
     cursor: help;
   }
-  .mdx-marker {
-    display: block;
-    margin-left: -${theme.space[4]};
-    margin-right: -${theme.space[4]};
-    padding-left: ${theme.space[4]};
-    padding-right: ${theme.space[4]};
-    background-color: ${theme.colors.gray[200]};
-    box-shadow: inset 3px 0px 0 0px ${theme.colors.blue[600]};
-    min-width: fit-content;
-  }
   .remark-code-title {
     padding: ${theme.space[2]} ${theme.space[4]};
     font-family: ${theme.fonts.mono};
@@ -149,9 +139,6 @@ export const prismLightTheme = css`
   pre[class*='language-'] {
     background: ${theme.colors.gray[50]};
     border: 1px solid ${theme.colors.gray[200]};
-  }
-  .mdx-marker {
-    background-color: hsla(204, 45%, 96%, 1);
   }
 `;
 
@@ -216,9 +203,6 @@ export const prismDarkTheme = css`
   pre[class*='language-'] {
     background: ${theme.colors.gray[800]};
     border: 1px solid ${theme.colors.gray[700]};
-  }
-  .mdx-marker {
-    background-color: ${theme.colors.gray[700]};
   }
   .remark-code-title {
     background: ${theme.colors.gray[700]};
