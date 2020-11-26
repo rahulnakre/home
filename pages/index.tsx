@@ -34,12 +34,13 @@ const Home:FC<HomeProps> = () => {
           maxWidth="700px"
         >
           <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
-            Hey, I’m Rahul Nakre
+            Hey, I'm Rahul Nakre 👋🏾
           </Heading>
           <Text color={secondaryTextColor[colorMode]}>
-            I’m a developer currently working a Honeybee Hub. My interests area 
-            backends for web services, infrastructure, and building products.
-            CS @ UofT.
+            I’m a <Text as="mark">Software Developer</Text> currently doing a work term at Honeybee Hub, a startup focused on 
+            empowering researchers and participants. My main technical interests include
+            backends for web services, software infrastructure, and building products.<br />
+            <Text as="mark">CS @ UofT</Text>.
           </Text>
         </Flex>
         <Flex
