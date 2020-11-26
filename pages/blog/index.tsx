@@ -1,36 +1,76 @@
 import React, { FC } from "react";
-import fs from "fs";
 import Link from "next/link";
+import { getPostInfoList } from "../api/posts";
+import Container from "../../components/Container";
+import { Stack, Flex, Heading, Box, Text, useColorMode } from "@chakra-ui/react";
+import PostLink from "../../components/PostLink";
 
-type BlogProps = {
-  postTitles: string[]
+export type GhostPostInfo = {
+  id: string;
+  title: string;
+  slug: string;
+  publishedAt: string;
+  readingTime: string;
+  custom_excerpt: string;
 }
 
-const Blog:FC<BlogProps> = ({ postTitles }) => {
+type BlogProps = {
+  postTitles: string[],
+  ghostPostInfoList: GhostPostInfo[];
+}
+
+const Blog:FC<BlogProps> = ({ ghostPostInfoList }) => {
   return (
-    <>
-    <h1>heres blog</h1>
-    {/* {postTitles} */}
-      {postTitles.map(postTitle => {
-        return (
-          <div key={postTitle}>
-            <Link  href={"/blog/" + postTitle}>
-              <a>{postTitle}</a>
-            </Link>
-          </div>
-        );
-      })}
-    </>
+    <Container>
+      <Stack
+        as="main"
+        spacing={8}
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        margin="0 auto 4rem auto"
+        maxWidth="700px"
+      >
+        <Flex
+          flexDirection="column"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          maxWidth="700px"
+          width="100%"
+        >
+          <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
+            Blog
+          </Heading>
+
+        </Flex>
+        <Flex
+          flexDirection="column"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          maxWidth="700px"
+          width="100%"
+          marginTop={8}
+        >
+          {ghostPostInfoList.map(postInfo => {
+            return (
+              <Link href={"/blog/" + postInfo.slug} key={postInfo.id}>
+                <div>
+                  <PostLink title={postInfo.title} excerpt={postInfo.custom_excerpt} />
+                </div>
+              </Link>
+            );
+          })}
+        </Flex>
+      </Stack>
+    </Container>
   );
 }
 
 export const getStaticProps = async () => {
-  const files: string[] = fs.readdirSync("posts");
-  const f = files.map(fileName => fileName.replace(".md", ""))
-  console.log(f)
+  let ghostPostInfoList: GhostPostInfo[] = await getPostInfoList();
+
   return {
     props: {
-      postTitles: files.map(fileName => fileName.replace(".md", ""))
+      ghostPostInfoList: ghostPostInfoList
     }
   }
 }

@@ -1,62 +1,94 @@
 import React, { FC } from "react"
-import fs from "fs"; // a node lib, but its fine
-import path from "path";
-import matter from "gray-matter"; // to extract metadata from .md
 import Head from "next/head";
-import marked from "marked";
+import { getSinglePost } from "../api/posts";
+import { useRouter } from "next/router";
+import Container from "../../components/Container";
+import Link from "next/link";
+import { getPostInfoList } from "../api/posts";
+import { Stack, Flex, Heading, Box, Text, useColorMode } from "@chakra-ui/react";
+import PostLink from "../../components/PostLink";
 
 type PostProps = {
   htmlString: string,
   data: {
     [key: string]: any
-  }
+  },
+  ghostPost: GhostPost;
 }
 
-const Post:FC<PostProps> = ({ htmlString, data }) => {
+type GhostPost = {
+  id: string;
+  title: string;
+  html: string;
+  slug: string;
+}
+
+const Post:FC<PostProps> = ({ ghostPost }) => {
+  const router = useRouter();
+  if (router.isFallback) {
+    return <h1>Loading...</h1>
+  }
+
   return (
-    <>
-      <Head>
-        <title>{data.title}</title>
-        <meta title="description" content={data.description} />
-      </Head>
-      <div>
-        contents below
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: htmlString }} />
-    </>
+    <Container>
+      {/* <Head>
+        <title>{ghostPost.title}</title>
+      </Head> */}
+      <Stack
+        as="main"
+        spacing={8}
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        margin="0 auto 4rem auto"
+        maxWidth="700px"
+      >
+        <Flex
+          flexDirection="column"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          maxWidth="700px"
+          width="100%"
+        >
+          <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
+            {ghostPost.title}
+          </Heading>
+        </Flex>
+        <Flex
+          flexDirection="column"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          maxWidth="700px"
+          width="100%"
+          marginTop={8}
+        >
+          <div dangerouslySetInnerHTML={{ __html: ghostPost.html }} />
+        </Flex>
+      </Stack>
+    </Container>
+    // <Container>
+    //   <Head>
+    //     <title>{ghostPost.title}</title>
+    //     {/* <meta title="description" content={ghostPost.metaDescription} /> */}
+    //   </Head>
+    //   <h1>{ghostPost.title}</h1>
+    //   <div dangerouslySetInnerHTML={{ __html: ghostPost.html }} />
+    // </Container>
   );
 }
 
 export const getStaticPaths = async () => {
-  const files: string[] = fs.readdirSync('posts')
-  const paths = files.map(filename => ({
-    params: {
-      slug: filename.replace(".md", "")
-    }
-  }));
-
   return {
-    paths: paths,
-    // build everything at build time
-    fallback: false,
-  };
+    paths: [],
+    fallback: true,
+  }
 }
 
-// Fetches the content of the post
-// anything in the props obj gets sent as props to our component
-// param we need to fetch data for gets sent to this function
 export const getStaticProps = async ({ params: { slug } }) => {
-  const mdWithMetadata: string = fs.readFileSync(
-    path.join('posts', slug + ".md")
-  ).toString();
-  const parsedMd: matter.GrayMatterFile<string> = matter(mdWithMetadata);
-  const htmlString: string = marked(parsedMd.content);
+  const ghostPost = await getSinglePost(slug);
 
   return {
     props: {
-      // contents: parsedMd.content,
-      htmlString,
-      data: parsedMd.data,
+      ghostPost: ghostPost,
     }
   };
 }
