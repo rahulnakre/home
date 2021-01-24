@@ -2,9 +2,7 @@ import React, { FC } from "react"
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Container from "../../components/Container";
-import Link from "next/link";
-import { Stack, Flex, Heading, Box, Text, useColorMode } from "@chakra-ui/react";
-import PostLink from "../../components/PostLink";
+import { Stack, Flex, Heading } from "@chakra-ui/react";
 import fs from 'fs';
 import path from 'path';
 import { GetStaticPaths } from "next";
@@ -12,30 +10,15 @@ import matter from "gray-matter";
 import marked from "marked";
 
 type PostProps = {
-  // content: any;
   htmlString: any;
   data: any;
-  // htmlString: string,
-  // data: {
-  //   [key: string]: any
-  // },
-  // ghostPost: GhostPost;
 }
-
-// type GhostPost = {
-//   id: string;
-//   title: string;
-//   html: string;
-//   slug: string;
-// }
 
 const Post:FC<PostProps> = (props) => {
   const router = useRouter();
   if (router.isFallback) {
     return <h1>Loading...</h1>
   }
-
-  // console.log(props.content)
 
   return (
     <Container>
@@ -70,18 +53,15 @@ const Post:FC<PostProps> = (props) => {
           width="100%"
           marginTop={8}
         >
-          <div dangerouslySetInnerHTML={{ __html: props.htmlString }} />
+          <div 
+            style={{
+              color: "white"
+            }}
+            dangerouslySetInnerHTML={{ __html: props.htmlString }} 
+          />
         </Flex>
       </Stack>
     </Container>
-    // <Container>
-    //   <Head>
-    //     <title>{ghostPost.title}</title>
-    //     {/* <meta title="description" content={ghostPost.metaDescription} /> */}
-    //   </Head>
-    //   <h1>{ghostPost.title}</h1>
-    //   <div dangerouslySetInnerHTML={{ __html: ghostPost.html }} />
-    // </Container>
   );
 }
 
