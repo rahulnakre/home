@@ -81,6 +81,7 @@ const Container = ({ children }) => {
       <Flex
         as="main"
         justifyContent="center"
+        // justifyContent="flex-start"
         flexDirection="column"
         bg={bgColor[colorMode]}
         color={primarytextColor[colorMode]}

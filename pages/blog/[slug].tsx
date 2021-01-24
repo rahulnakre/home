@@ -1,39 +1,48 @@
 import React, { FC } from "react"
 import Head from "next/head";
-import { getSinglePost } from "../api/posts";
 import { useRouter } from "next/router";
 import Container from "../../components/Container";
 import Link from "next/link";
-import { getPostInfoList } from "../api/posts";
 import { Stack, Flex, Heading, Box, Text, useColorMode } from "@chakra-ui/react";
 import PostLink from "../../components/PostLink";
+import fs from 'fs';
+import path from 'path';
+import { GetStaticPaths } from "next";
+import matter from "gray-matter";
+import marked from "marked";
 
 type PostProps = {
-  htmlString: string,
-  data: {
-    [key: string]: any
-  },
-  ghostPost: GhostPost;
+  // content: any;
+  htmlString: any;
+  data: any;
+  // htmlString: string,
+  // data: {
+  //   [key: string]: any
+  // },
+  // ghostPost: GhostPost;
 }
 
-type GhostPost = {
-  id: string;
-  title: string;
-  html: string;
-  slug: string;
-}
+// type GhostPost = {
+//   id: string;
+//   title: string;
+//   html: string;
+//   slug: string;
+// }
 
-const Post:FC<PostProps> = ({ ghostPost }) => {
+const Post:FC<PostProps> = (props) => {
   const router = useRouter();
   if (router.isFallback) {
     return <h1>Loading...</h1>
   }
 
+  // console.log(props.content)
+
   return (
     <Container>
-      {/* <Head>
-        <title>{ghostPost.title}</title>
-      </Head> */}
+      <Head>
+        <title>{props.data.title}</title>
+        <meta title="description" content={props.data.description} />
+      </Head>
       <Stack
         as="main"
         spacing={8}
@@ -50,7 +59,7 @@ const Post:FC<PostProps> = ({ ghostPost }) => {
           width="100%"
         >
           <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
-            {ghostPost.title}
+            {props.data.title}
           </Heading>
         </Flex>
         <Flex
@@ -61,7 +70,7 @@ const Post:FC<PostProps> = ({ ghostPost }) => {
           width="100%"
           marginTop={8}
         >
-          <div dangerouslySetInnerHTML={{ __html: ghostPost.html }} />
+          <div dangerouslySetInnerHTML={{ __html: props.htmlString }} />
         </Flex>
       </Stack>
     </Container>
@@ -76,21 +85,33 @@ const Post:FC<PostProps> = ({ ghostPost }) => {
   );
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const files: string[] = fs.readdirSync('data/blog')
+  const paths = files.map(filename => ({
+    params: {
+      slug: filename.replace(".md", ""),
+    }
+  }));
+
   return {
-    paths: [],
-    fallback: true,
+    paths: paths, 
+    fallback: false,
   }
 }
 
 export const getStaticProps = async ({ params: { slug } }) => {
-  const ghostPost = await getSinglePost(slug);
+  const mdWithMetadata: string = fs.readFileSync(
+    path.join('data/blog/', slug + ".md")
+  ).toString();
+  const parsedMd: matter.GrayMatterFile<string> = matter(mdWithMetadata);
+  const htmlString: string = marked(parsedMd.content)
 
   return {
     props: {
-      ghostPost: ghostPost,
+      htmlString: htmlString,
+      data: parsedMd.data,
     }
-  };
+  }
 }
 
 export default Post;

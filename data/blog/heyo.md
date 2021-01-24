@@ -1,0 +1,7 @@
+---
+title: Heyo
+description: A litte about the blog and what I plan on talking about here 
+slug: heyo
+---
+I want to mainly focus this on technical blog posts, but it's probably going to end up being more broadly about tech and business. I've enjoyed writing recently, which is why I want to setup a blog page on my site. <br/><br/>
+Speaking about the site, I think I'll have my first post be about how I set this all up. I could have use something like github pages, or just posted on medium/substack, but where's the fun in that?
