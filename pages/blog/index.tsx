@@ -66,7 +66,6 @@ const Blog:FC<BlogProps> = (props) => {
   );
 }
 
-
 export const getStaticProps: GetStaticProps = async () => {
   const files = fs.readdirSync("data/blog");
   const posts: PostInfo[] = files.map(filename => {
