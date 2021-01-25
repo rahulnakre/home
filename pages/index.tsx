@@ -15,7 +15,6 @@ const Home:FC<HomeProps> = () => {
 
   return (
     <Container>
-      {/* <Header title={"☕ Rahul's Corner"}/> */}
       <Stack
         as="main"
         spacing={8}
@@ -50,8 +49,7 @@ const Home:FC<HomeProps> = () => {
           <Heading letterSpacing="tight" mb={4} size="xl" fontWeight={700}>
             Interests
           </Heading>
-          I'm currently trying to learn more about infrastructure, more specifically I've been playing around with consensus algorithms and learning how containers work at a more granular level. 
-          {/* Blog Posts Go here */}
+          I'm currently learning more about infrastructure, webassembly, trying to train GANs, and working on Huby 
         </Flex>
       </Stack>
     </Container>

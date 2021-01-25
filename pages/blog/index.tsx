@@ -1,25 +1,24 @@
 import React, { FC } from "react";
 import Link from "next/link";
-import { getPostInfoList } from "../api/posts";
 import Container from "../../components/Container";
-import { Stack, Flex, Heading, Box, Text, useColorMode } from "@chakra-ui/react";
+import { Stack, Flex, Heading } from "@chakra-ui/react";
 import PostLink from "../../components/PostLink";
+import { GetStaticProps } from "next";
+import fs from 'fs';
+import matter from "gray-matter";
+import path from "path";
 
-export type GhostPostInfo = {
-  id: string;
+export type PostInfo = {
   title: string;
   slug: string;
-  publishedAt: string;
-  readingTime: string;
-  custom_excerpt: string;
+  description?: string;
 }
 
 type BlogProps = {
-  postTitles: string[],
-  ghostPostInfoList: GhostPostInfo[];
+  posts: PostInfo[],
 }
 
-const Blog:FC<BlogProps> = ({ ghostPostInfoList }) => {
+const Blog:FC<BlogProps> = (props) => {
   return (
     <Container>
       <Stack
@@ -40,7 +39,6 @@ const Blog:FC<BlogProps> = ({ ghostPostInfoList }) => {
           <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
             Blog
           </Heading>
-
         </Flex>
         <Flex
           flexDirection="column"
@@ -50,27 +48,41 @@ const Blog:FC<BlogProps> = ({ ghostPostInfoList }) => {
           width="100%"
           marginTop={8}
         >
-          {ghostPostInfoList.map(postInfo => {
+          {props.posts.map(post => {
             return (
-              <Link href={"/blog/" + postInfo.slug} key={postInfo.id}>
+              <Link 
+                href={"/blog/" + post.slug} 
+                key={post.slug}
+              >
                 <div>
-                  <PostLink title={postInfo.title} excerpt={postInfo.custom_excerpt} />
+                  <PostLink title={post.title} excerpt={post?.description} />
                 </div>
               </Link>
             );
-          })}
+          })} 
         </Flex>
       </Stack>
     </Container>
   );
 }
 
-export const getStaticProps = async () => {
-  let ghostPostInfoList: GhostPostInfo[] = await getPostInfoList();
+export const getStaticProps: GetStaticProps = async () => {
+  const files = fs.readdirSync("data/blog");
+  const posts: PostInfo[] = files.map(filename => {
+    const mdWithMetadata: string = fs.readFileSync(
+      path.join('data/blog/', filename)
+    ).toString();
+    const parsedMd: matter.GrayMatterFile<string> = matter(mdWithMetadata);
+    return {
+      title: parsedMd.data.title,
+      slug: parsedMd.data.slug,
+      description: parsedMd.data.description,
+    }
+  });
 
   return {
     props: {
-      ghostPostInfoList: ghostPostInfoList
+      posts: posts
     }
   }
 }

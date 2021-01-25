@@ -1,6 +1,5 @@
 import React, { FC } from "react";
-import Link from "next/link";
-import { Stack, Flex, Heading, Box, Text, useColorMode } from "@chakra-ui/react";
+import { Flex, Heading, Box, Text, useColorMode } from "@chakra-ui/react";
 
 
 type PostLinkProps = {
@@ -16,7 +15,7 @@ const PostLink:FC<PostLinkProps> = ({ title, excerpt }) => {
   };
 
   return (
-    <Box mb={8} display="block" width="100%">
+    <Box mb={8} display="block" width="100%" >
       <Flex
         width="100%"
         align="flex-start"

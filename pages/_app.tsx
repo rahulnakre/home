@@ -1,8 +1,10 @@
 import '../styles/globals.css'
 import { ChakraProvider, useColorMode, CSSReset, ColorModeProvider } from "@chakra-ui/react"
 import { Global, css } from '@emotion/react';
-import { prismLightTheme, prismDarkTheme } from '../styles/prism';
 import Head from 'next/head';
+import { MDXProvider } from '@mdx-js/react';
+import MDXComponents from 'components/MDXComponents';
+
 
 const GlobalStyle = ({ children }) => {
   const { colorMode } = useColorMode();
@@ -12,7 +14,6 @@ const GlobalStyle = ({ children }) => {
       <CSSReset />
       <Global
         styles={css`
-          ${colorMode === 'light' ? prismLightTheme : prismDarkTheme};
           ::selection {
             background-color: #47a3f3;
             color: #fefefe;
@@ -51,13 +52,10 @@ function MyApp({ Component, pageProps }) {
             name="msapplication-config"
           />
           <title>Rahul Nakre's Cove</title>
-          {/* <meta content="14d2e73487fa6c71" name="yandex-verification" />
-          <meta
-            content="eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw"
-            name="google-site-verification"
-          /> */}
         </Head>
-        <Component {...pageProps} />
+        <MDXProvider components={MDXComponents}>
+          <Component {...pageProps} />
+        </MDXProvider>
       </GlobalStyle>
     </ChakraProvider>
   );
