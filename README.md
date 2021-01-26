@@ -1,6 +1,6 @@
 ## Rahul's Cove
 
-Visit the site @ [https://nakre.ca]
+Visit the site @ https://nakre.ca
 
 Personal site
 
