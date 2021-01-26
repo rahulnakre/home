@@ -1,6 +1,8 @@
 ## Rahul's Cove
 
-Visit the site @ nakre.ca
+Visit the site @ [https://nakre.ca]
 
-Initial version is a fork from: https://github.com/leerob/leerob.io
+Personal site
+
+Basically a fork from: https://github.com/leerob/leerob.io
 I'm going to keep tweaking it whenever I'm bored probably
