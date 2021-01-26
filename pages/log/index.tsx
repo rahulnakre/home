@@ -78,6 +78,7 @@ const Log:FC<LogProps> = (props) => {
 export const getStaticProps: GetStaticProps = async () => {
   const files = fs.readdirSync("data/log");
   const posts: PostInfo[] = files.map(filename => {
+    
     const mdWithMetadata: string = fs.readFileSync(
       path.join('data/log/', filename)
     ).toString();

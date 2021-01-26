@@ -11,7 +11,7 @@ const GlobalStyle = ({ children }) => {
 
   return (
     <>
-      <CSSReset />
+      {/* <CSSReset /> */}
       <Global
         styles={css`
           ::selection {

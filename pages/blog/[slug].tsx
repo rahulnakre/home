@@ -26,7 +26,7 @@ const Post:FC<PostProps> = (props) => {
   const content = hydrate(props.post, {
     components: MDXComponents
   });
-  console.log(content)
+  
   return (
     <Container>
       <Head>

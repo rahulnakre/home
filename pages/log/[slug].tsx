@@ -26,7 +26,7 @@ const Post:FC<LogProps> = (props) => {
   const content = hydrate(props.post, {
     components: MDXComponents
   });
-  console.log(content)
+  
   return (
     <Container>
       <Head>
@@ -76,8 +76,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
       slug: filename.replace(".mdx", ""),
     }
   }));
-
-  console.log(paths)
 
   return {
     paths: paths, 
