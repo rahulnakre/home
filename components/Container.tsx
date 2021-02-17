@@ -68,7 +68,7 @@ const Container = ({ children }) => {
           </NextLink>
           <NextLink href="/log" passHref>
             <Button as="a" variant="ghost" p={[1, 4]}>
-              Logs
+              Logs + Thought Dump
             </Button>
           </NextLink>
           {/* <NextLink href="/about" passHref>
