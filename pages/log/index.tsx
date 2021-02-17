@@ -43,10 +43,10 @@ const Log:FC<LogProps> = (props) => {
           width="100%"
         >
           <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
-            Logs + Thought Dump
+            Thoughts
           </Heading>
           <Text color={secondaryTextColor[colorMode]}>
-            Thought dump, easier to get some ideas out 
+            Thought dump, for when I don't feel like organizing thoughts in a blog
           </Text>
         </Flex>
         <Flex
@@ -83,12 +83,16 @@ export const getStaticProps: GetStaticProps = async () => {
       path.join('data/log/', filename)
     ).toString();
     const parsedMd: matter.GrayMatterFile<string> = matter(mdWithMetadata);
+    console.log(parsedMd.data)
     return {
       title: parsedMd.data.title,
       slug: parsedMd.data.slug,
       description: parsedMd.data.description,
     }
   });
+
+
+  posts.reverse();
 
   return {
     props: {

@@ -40,7 +40,7 @@ const Container = ({ children }) => {
         maxWidth="900px"
         width="100%"
         bg={navBgColor[colorMode]}
-        as="nav"
+        as={"nav" as any}
         p={8}
         mt={[0, 8]}
         mb={8}
@@ -68,7 +68,7 @@ const Container = ({ children }) => {
           </NextLink>
           <NextLink href="/log" passHref>
             <Button as="a" variant="ghost" p={[1, 4]}>
-              Logs + Thought Dump
+              Thoughts
             </Button>
           </NextLink>
           {/* <NextLink href="/about" passHref>

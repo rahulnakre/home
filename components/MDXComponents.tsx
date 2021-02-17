@@ -20,6 +20,9 @@ const CustomLink = (props) => {
 const MDXComponents = {
   // Image,
   a: CustomLink,
+  h1: props => <h1 style={{fontSize: 50, fontWeight: 100}} {...props} />,
+  br: props => <br {...props} />,
+  // br: br
 };
 
 export default MDXComponents;
