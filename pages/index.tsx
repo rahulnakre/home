@@ -34,7 +34,7 @@ const Home:FC<HomeProps> = () => {
           </Heading>
           <Text color={secondaryTextColor[colorMode]}>
             I’m a <Text as="mark">Software Developer</Text> currently doing a work term at Honeybee Hub, a startup focused on 
-            empowering researchers and participants. My main technical interests include
+            empowering researchers and participants. My main interests include
             backends for web services, software infrastructure, and building products.<br />
             <Text as="mark">CS @ UofT</Text>.
           </Text>
@@ -49,7 +49,7 @@ const Home:FC<HomeProps> = () => {
           <Heading letterSpacing="tight" mb={4} size="xl" fontWeight={700}>
             Interests
           </Heading>
-          I'm currently learning more about infrastructure, webassembly, trying to train GANs, and working on Huby 
+          I'm currently playing around with Rust, and trying to train GANs 
         </Flex>
       </Stack>
     </Container>
