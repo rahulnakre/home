@@ -32,11 +32,14 @@ const Home:FC<HomeProps> = () => {
           <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
             Hey, I'm Rahul Nakre 👋🏾
           </Heading>
+          <br />
           <Text color={secondaryTextColor[colorMode]}>
-            I’m a <Text as="mark">Software Developer</Text> currently doing a work term at Honeybee Hub, a startup focused on 
-            empowering researchers and participants. My main technical interests include
-            backends for web services, software infrastructure, and building products.<br />
-            <Text as="mark">CS @ UofT</Text>.
+            I’m a <Text as="mark">Software Engineer</Text>, most recently at <Text as="mark">AWS</Text>,
+            where I got to fully design an implement a self-service policy management tool using AWS. <br /><br />
+            Previously, I spent a year doing fullstack work at <Text as="mark">Honeybee Hub</Text>, a startup focused on 
+            empowering researchers and participants, where I worked on mobile, frontend portals, and payments.<br /><br />
+            My main technical interests include backends for web services, distributed systems, and building products.<br /><br />
+            <Text as="mark">CS @ University of Toronto</Text>.
           </Text>
         </Flex>
         <Flex
@@ -49,7 +52,8 @@ const Home:FC<HomeProps> = () => {
           <Heading letterSpacing="tight" mb={4} size="xl" fontWeight={700}>
             Interests
           </Heading>
-          I'm currently learning more about infrastructure, webassembly, trying to train GANs, and working on Huby 
+          I'm currently learning Rust, various topics in distributed systems, and webassembly. Also trying to get better at 
+          piano :).
         </Flex>
       </Stack>
     </Container>
