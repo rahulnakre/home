@@ -69,10 +69,12 @@ const Blog:FC<BlogProps> = (props) => {
 export const getStaticProps: GetStaticProps = async () => {
   const files = fs.readdirSync("data/blog");
   const posts: PostInfo[] = files.map(filename => {
+    console.log({"filename": filename})
     const mdWithMetadata: string = fs.readFileSync(
       path.join('data/blog/', filename)
     ).toString();
     const parsedMd: matter.GrayMatterFile<string> = matter(mdWithMetadata);
+    // console.log({"parsedMddata": parsedMd})
     return {
       title: parsedMd.data.title,
       slug: parsedMd.data.slug,
