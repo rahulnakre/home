@@ -2,7 +2,6 @@ import { FC } from 'react';
 import Container from '../components/Container';
 import { useColorMode, Heading, Text, Flex, Stack } from '@chakra-ui/react';
 
-
 type HomeProps = {
 }
 
@@ -30,20 +29,30 @@ const Home:FC<HomeProps> = () => {
           alignItems="flex-start"
           maxWidth="700px"
         >
-          {/* <Heading letterSpacing="tight" mb={2} as="h1" size="2xl"> */}
-          {/* <Heading letterSpacing="tight" mb={2} as="h1" fontSize={{ sm: '36px', md: '40px', lg: '56px' }}> */}
-          {/* <Heading letterSpacing="tight" mb={2} as="h1" fontSize={['sm', 'md', 'lg', 'xl']}> */}
-          <Heading letterSpacing="tight" mb={4} size="xl" fontWeight={700}>
+          <Heading>
             Hey, I'm Rahul Nakre 👋🏾
           </Heading>
           <br />
-          <Text color={secondaryTextColor[colorMode]}>
-            I’m a <Text as="mark">Software Engineer</Text>, most recently at <Text as="mark">AWS</Text>,
-            where I got to fully design an implement a self-service policy management tool using AWS. <br /><br />
+          <Text color={secondaryTextColor[colorMode]} variant='main'>
+            I’m a <Text as="mark">Software Engineer</Text> at <Text as="mark">AWS Identity</Text>, where I work on auth and get
+            to do many fun things.
+          </Text>
+          <br />
+          <Text color={secondaryTextColor[colorMode]} variant='main'>
             Previously, I spent a year doing fullstack work at <Text as="mark">Honeybee Hub</Text>, a startup focused on 
-            empowering researchers and participants, where I worked on mobile, frontend portals, and payments.<br /><br />
-            My main technical interests include backends for web services, distributed systems, and building products.<br /><br />
-            <Text as="mark">CS @ University of Toronto</Text>.
+            empowering researchers and participants. I worked on mobile, frontend portals, backend logic, devops, and payments. Working at 
+            a startup was a great experience and I miss the chaos sometimes.<br />
+          </Text>
+          <br />
+          <Text color={secondaryTextColor[colorMode]} variant='main'>
+            More than any specific technical interest, I love seeing a product through from start to finish. If I had to pick one,
+            I'd say distributed systems and compilers have been my favorite topics within CS.<br />
+          </Text>
+          <br />
+          <Text as="mark">CS @ University of Toronto</Text>
+          <br />
+          <Text color={secondaryTextColor[colorMode]} variant='main'>
+            Feel free to reach out about whatever 🫣
           </Text>
         </Flex>
 
@@ -52,13 +61,15 @@ const Home:FC<HomeProps> = () => {
           justifyContent="flex-start"
           alignItems="flex-start"
           maxWidth="700px"
-          mt={8}
         >
-          <Heading letterSpacing="tight" mb={4} size="xl" fontWeight={700}>
+          <Heading>
             Interests
           </Heading>
-          I'm currently learning Rust, various topics in distributed systems, and webassembly. Also trying to get better at 
-          piano :).
+          <br />
+          <Text color={secondaryTextColor[colorMode]} variant='main'>
+          Currently working on my writing and pottery skills. My writing isn't where I want it to be, so I'm going to
+          try and fail on here in hopes of getting better :)
+          </Text>
         </Flex>
       </Stack>
     </Container>

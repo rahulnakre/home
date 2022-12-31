@@ -1,22 +1,34 @@
 import '../styles/globals.css'
-import { ChakraProvider, useColorMode, CSSReset, ColorModeProvider } from "@chakra-ui/react"
+import { ChakraProvider, useColorMode, extendTheme } from "@chakra-ui/react"
 import { Global, css } from '@emotion/react';
 import Head from 'next/head';
 import { MDXProvider } from '@mdx-js/react';
 import MDXComponents from 'components/MDXComponents';
 
 
+const theme = extendTheme({
+  components: {
+    Text: {
+      variants: {
+        'main': {
+          lineHeight: '2em',
+          fontSize: '22px'
+        }
+      }
+    }
+  }
+})
+
 const GlobalStyle = ({ children }) => {
   const { colorMode } = useColorMode();
 
   return (
     <>
-      {/* <CSSReset /> */}
       <Global
         styles={css`
           ::selection {
-            background-color: #47a3f3;
-            color: #fefefe;
+            background-color: #aec6cf;
+            color: ${colorMode === 'light' ? 'white' : '#171923'};
           }
           html {
             min-width: 360px;
@@ -37,7 +49,7 @@ const GlobalStyle = ({ children }) => {
 
 function MyApp({ Component, pageProps }) {
   return( 
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <GlobalStyle>
         <Head>
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
