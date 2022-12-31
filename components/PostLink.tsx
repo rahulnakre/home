@@ -1,10 +1,13 @@
 import React, { FC } from "react";
-import { Flex, Heading, Box, Text, useColorMode, Link, LinkProps } from "@chakra-ui/react";
+import { Flex, Heading, Box, Text, useColorMode, Link } from "@chakra-ui/react";
+import NextLink from 'next/link';
 
 
-interface PostLinkProps extends LinkProps {
+interface PostLinkProps {
   title: string,
   excerpt: string;
+  href: string;
+  key: string;
 }
 
 const PostLink:FC<PostLinkProps> = ({ title, excerpt, ...linkProps }) => { 
@@ -15,11 +18,18 @@ const PostLink:FC<PostLinkProps> = ({ title, excerpt, ...linkProps }) => {
   };
 
   return (
-    <Link {...linkProps} >
+    <NextLink {...linkProps} passHref>
       <Box 
         mb={8} 
         display="block" 
         width="100%" 
+        _hover={{
+          color: "blue.500",
+          cursor: "pointer",
+          textDecoration: "underline"
+        }}
+        borderRadius='10px'
+        padding="10px"
       >
         <Flex
           width="100%"
@@ -35,7 +45,7 @@ const PostLink:FC<PostLinkProps> = ({ title, excerpt, ...linkProps }) => {
           {excerpt}
         </Text>
       </Box>
-    </Link>
+    </NextLink>
   )
 }
 

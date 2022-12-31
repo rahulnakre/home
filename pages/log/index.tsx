@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import Link from "next/link";
 import Container from "../../components/Container";
 import { Stack, Flex, Heading, Text, useColorMode } from "@chakra-ui/react";
 import PostLink from "../../components/PostLink";
@@ -59,14 +58,12 @@ const Log:FC<LogProps> = (props) => {
         >
           {props.posts.map(post => {
             return (
-              <Link 
+              <PostLink 
+                title={post.title} 
+                excerpt={post?.description} 
                 href={"/log/" + post.slug} 
                 key={post.slug}
-              >
-                <div>
-                  <PostLink title={post.title} excerpt={post?.description} />
-                </div>
-              </Link>
+              />
             );
           })} 
         </Flex>
