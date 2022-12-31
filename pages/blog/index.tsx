@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import Link from "next/link";
 import Container from "../../components/Container";
 import { Stack, Flex, Heading } from "@chakra-ui/react";
 import PostLink from "../../components/PostLink";
