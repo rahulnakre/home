@@ -23,13 +23,17 @@ const Home:FC<HomeProps> = () => {
         margin="0 auto 4rem auto"
         maxWidth="700px"
       >
+
         <Flex
           flexDirection="column"
           justifyContent="flex-start"
           alignItems="flex-start"
           maxWidth="700px"
         >
-          <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
+          {/* <Heading letterSpacing="tight" mb={2} as="h1" size="2xl"> */}
+          {/* <Heading letterSpacing="tight" mb={2} as="h1" fontSize={{ sm: '36px', md: '40px', lg: '56px' }}> */}
+          {/* <Heading letterSpacing="tight" mb={2} as="h1" fontSize={['sm', 'md', 'lg', 'xl']}> */}
+          <Heading letterSpacing="tight" mb={4} size="xl" fontWeight={700}>
             Hey, I'm Rahul Nakre 👋🏾
           </Heading>
           <br />
@@ -42,6 +46,7 @@ const Home:FC<HomeProps> = () => {
             <Text as="mark">CS @ University of Toronto</Text>.
           </Text>
         </Flex>
+
         <Flex
           flexDirection="column"
           justifyContent="flex-start"
