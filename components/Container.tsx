@@ -71,22 +71,11 @@ const Container = ({ children }) => {
               Thoughts
             </Button>
           </NextLink>
-          {/* <NextLink href="/about" passHref>
-            <Button as="a" variant="ghost" p={[1, 4]}>
-              About
-            </Button>
-          </NextLink>
-          <NextLink href="/about" passHref>
-            <Button as="a" variant="ghost" p={[1, 4]}>
-              Contact
-            </Button>
-          </NextLink> */}
         </Box>
       </StickyNav>
       <Flex
         as="main"
         justifyContent="center"
-        // justifyContent="flex-start"
         flexDirection="column"
         bg={bgColor[colorMode]}
         color={primarytextColor[colorMode]}

@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Container from "../../components/Container";
-import { Stack, Flex, Heading, useColorMode, Text } from "@chakra-ui/react";
+import { Stack, Flex, Heading } from "@chakra-ui/react";
 import fs from 'fs';
 import path from 'path';
 import { GetStaticPaths } from "next";

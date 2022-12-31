@@ -1,5 +1,4 @@
 import React from 'react';
-import NextLink from 'next/link';
 import { Flex, Link, IconButton } from '@chakra-ui/react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,9 +7,6 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons"
-
-{/* <i class="far fa-sun"></i> */}
-import {} from "@fortawesome/react-fontawesome"
 
 const Footer = () => (
   <Flex align="center" mb={4} direction="column">
@@ -55,19 +51,6 @@ const Footer = () => (
           variant="ghost"
         />
       </Link>
-    </div>
-    <div>
-      {/* <NextLink href="/newsletter" passHref>
-        <Link
-          fontSize="sm"
-          color="gray.500"
-          minWidth="100px"
-          mr={2}
-          title="Newsletter"
-        >
-          /newsletter
-        </Link>
-      </NextLink> */}
     </div>
   </Flex>
 );

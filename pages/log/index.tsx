@@ -83,7 +83,7 @@ export const getStaticProps: GetStaticProps = async () => {
       path.join('data/log/', filename)
     ).toString();
     const parsedMd: matter.GrayMatterFile<string> = matter(mdWithMetadata);
-    console.log(parsedMd.data)
+    
     return {
       title: parsedMd.data.title,
       slug: parsedMd.data.slug,

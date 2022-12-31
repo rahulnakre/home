@@ -7,7 +7,7 @@ interface PostLinkProps extends LinkProps {
   excerpt: string;
 }
 
-const PostLink:FC<PostLinkProps> = ({ title, excerpt, ...rest }) => { 
+const PostLink:FC<PostLinkProps> = ({ title, excerpt, ...linkProps }) => { 
   const { colorMode } = useColorMode();
   const secondaryTextColor = {
     light: 'gray.700',
@@ -15,19 +15,11 @@ const PostLink:FC<PostLinkProps> = ({ title, excerpt, ...rest }) => {
   };
 
   return (
-    <Link 
-    // href={"/blog/" + post.slug} 
-    // key={post.slug}
-     {...rest}
-    >
+    <Link {...linkProps} >
       <Box 
         mb={8} 
         display="block" 
         width="100%" 
-        // backgroundColor="tomato"
-        // _hover={{ 
-        //   bg: "teal.600" 
-        // }}
       >
         <Flex
           width="100%"

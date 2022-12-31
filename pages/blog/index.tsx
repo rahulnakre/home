@@ -50,19 +50,12 @@ const Blog:FC<BlogProps> = (props) => {
         >
           {props.posts.map(post => {
             return (
-              // <Link 
-              //   href={"/blog/" + post.slug} 
-              //   key={post.slug}
-              // >
-              //   <div>
-                  <PostLink  
-                    title={post.title} 
-                    excerpt={post?.description} 
-                    href={"/blog/" + post.slug} 
-                    key={post.slug} 
-                  />
-                // </div>
-              // </Link>
+              <PostLink  
+                title={post.title} 
+                excerpt={post?.description} 
+                href={"/blog/" + post.slug} 
+                key={post.slug} 
+              />
             );
           })} 
         </Flex>
@@ -79,7 +72,7 @@ export const getStaticProps: GetStaticProps = async () => {
       path.join('data/blog/', filename)
     ).toString();
     const parsedMd: matter.GrayMatterFile<string> = matter(mdWithMetadata);
-    // console.log({"parsedMddata": parsedMd})
+    
     return {
       title: parsedMd.data.title,
       slug: parsedMd.data.slug,
