@@ -1,13 +1,13 @@
 import React, { FC } from "react";
-import { Flex, Heading, Box, Text, useColorMode } from "@chakra-ui/react";
+import { Flex, Heading, Box, Text, useColorMode, Link, LinkProps } from "@chakra-ui/react";
 
 
-type PostLinkProps = {
+interface PostLinkProps extends LinkProps {
   title: string,
   excerpt: string;
 }
 
-const PostLink:FC<PostLinkProps> = ({ title, excerpt }) => { 
+const PostLink:FC<PostLinkProps> = ({ title, excerpt, ...rest }) => { 
   const { colorMode } = useColorMode();
   const secondaryTextColor = {
     light: 'gray.700',
@@ -15,21 +15,35 @@ const PostLink:FC<PostLinkProps> = ({ title, excerpt }) => {
   };
 
   return (
-    <Box mb={8} display="block" width="100%" >
-      <Flex
-        width="100%"
-        align="flex-start"
-        justifyContent="space-between"
-        flexDirection={['column', 'row']}
+    <Link 
+    // href={"/blog/" + post.slug} 
+    // key={post.slug}
+     {...rest}
+    >
+      <Box 
+        mb={8} 
+        display="block" 
+        width="100%" 
+        // backgroundColor="tomato"
+        // _hover={{ 
+        //   bg: "teal.600" 
+        // }}
       >
-        <Heading size="md" as="h3" mb={2} fontWeight="medium">
-          {title}
-        </Heading>
-      </Flex>
-      <Text color={secondaryTextColor[colorMode]}>
-        {excerpt}
-      </Text>
-    </Box>
+        <Flex
+          width="100%"
+          align="flex-start"
+          justifyContent="space-between"
+          flexDirection={['column', 'row']}
+        >
+          <Heading size="md" as="h3" mb={2} fontWeight="medium">
+            {title}
+          </Heading>
+        </Flex>
+        <Text color={secondaryTextColor[colorMode]}>
+          {excerpt}
+        </Text>
+      </Box>
+    </Link>
   )
 }
 

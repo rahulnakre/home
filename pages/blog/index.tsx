@@ -50,14 +50,19 @@ const Blog:FC<BlogProps> = (props) => {
         >
           {props.posts.map(post => {
             return (
-              <Link 
-                href={"/blog/" + post.slug} 
-                key={post.slug}
-              >
-                <div>
-                  <PostLink title={post.title} excerpt={post?.description} />
-                </div>
-              </Link>
+              // <Link 
+              //   href={"/blog/" + post.slug} 
+              //   key={post.slug}
+              // >
+              //   <div>
+                  <PostLink  
+                    title={post.title} 
+                    excerpt={post?.description} 
+                    href={"/blog/" + post.slug} 
+                    key={post.slug} 
+                  />
+                // </div>
+              // </Link>
             );
           })} 
         </Flex>
