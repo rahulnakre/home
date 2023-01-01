@@ -7,31 +7,40 @@ import fs from 'fs';
 import path from 'path';
 import { GetStaticPaths } from "next";
 import matter from "gray-matter";
-import marked from "marked";
-import renderToString from 'next-mdx-remote/render-to-string';
+import { marked } from "marked";
+// import renderToString from 'next-mdx-remote/render-to-string';
 import MDXComponents from "components/MDXComponents";
-import hydrate from 'next-mdx-remote/hydrate';
+// import hydrate from 'next-mdx-remote/hydrate';
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+// import "remark-autolink-headings";
+// import "remark-slug";
+import { compile } from '@mdx-js/mdx'
+
 
 type PostProps = {
-  htmlString: any;
-  data: any;
-  post: any;
+  // htmlString: any;
+  // data: any;
+  title: string;
+  description: string;
+  // post: any;
+  mdxSource: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, string>>
 }
 
-const Post:FC<PostProps> = (props) => {
+const Post:FC<PostProps> = ({ title, description, mdxSource }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <h1>Loading...</h1>
   }
-  const content = hydrate(props.post, {
-    components: MDXComponents
-  });
+  // const content = hydrate(props.post, {
+  //   components: MDXComponents
+  // });
   
   return (
     <Container>
       <Head>
-        <title>{props.data.title}</title>
-        <meta title="description" content={props.data.description} />
+        <title>{title}</title>
+        <meta title="description" content={description} />
       </Head>
       <Stack
         as="main"
@@ -49,7 +58,7 @@ const Post:FC<PostProps> = (props) => {
           width="100%"
         >
           <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
-            {props.data.title}
+            {title}
           </Heading>
         </Flex>
         <Flex
@@ -61,7 +70,10 @@ const Post:FC<PostProps> = (props) => {
           marginTop={8}
         >
           <div>
-            {content}
+            {/* {content} */}
+            {/* <MDXRemote {...mdxSource} components={MDXComponents} /> */}
+            <MDXRemote {...mdxSource} /> 
+            {/* d */}
           </div>
         </Flex>
       </Stack>
@@ -88,23 +100,39 @@ export const getStaticProps = async ({ params: { slug } }) => {
     path.join('data/blog/', slug + ".mdx")
   ).toString();
   const parsedMdx: matter.GrayMatterFile<string> = matter(mdxWithMetadata);
-  const htmlString: string = marked(parsedMdx.content)
-  const mdxSource = await renderToString(parsedMdx.content, {
-    components: MDXComponents,
-    mdxOptions: {
-      remarkPlugins: [
-        require('remark-autolink-headings'),
-        require('remark-slug'),
-        require('remark-code-titles')
-      ],
-    }
-  });
+
+  // const htmlString: string = marked(parsedMdx.content)
+  
+  // const mdxSource: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, string>> = await serialize(
+  //   parsedMdx.content, 
+  //   {
+  //     // components: MDXComponents,
+  //     mdxOptions: {
+  //       remarkPlugins: [
+  //         await compile
+  //         // import("remark-autolink-headings"),
+  //         // import('remark-slug'),
+  //         // import('remark-code-titles')
+  //       ],
+  //     },
+  //     parseFrontmatter: true
+  //   }
+  // );
+
+  const mdxSource = await serialize(mdxWithMetadata, { 
+    parseFrontmatter: true,
+    mdxOptions: { development: false },
+
+  })
+
 
   return {
     props: {
-      htmlString: htmlString,
-      data: parsedMdx.data,
-      post: mdxSource
+      // htmlString: htmlString,
+      // data: parsedMdx.data,
+      title: parsedMdx.data.title,
+      description: parsedMdx.data.description,
+      mdxSource: mdxSource
     }
   }
 }

@@ -8,9 +8,9 @@ import path from 'path';
 import { GetStaticPaths } from "next";
 import matter from "gray-matter";
 import marked from "marked";
-import renderToString from 'next-mdx-remote/render-to-string';
+// import renderToString from 'next-mdx-remote/render-to-string';
 import MDXComponents from "components/MDXComponents";
-import hydrate from 'next-mdx-remote/hydrate';
+// import hydrate from 'next-mdx-remote/hydrate';
 
 type LogProps = {
   htmlString: any;
@@ -23,9 +23,9 @@ const Post:FC<LogProps> = (props) => {
   if (router.isFallback) {
     return <h1>Loading...</h1>
   }
-  const content = hydrate(props.post, {
-    components: MDXComponents
-  });
+  // const content = hydrate(props.post, {
+  //   components: MDXComponents
+  // });
   
   return (
     <Container>
@@ -61,7 +61,8 @@ const Post:FC<LogProps> = (props) => {
           marginTop={8}
         >
           <div>
-            {content}
+            {/* {content} */}
+            hi
           </div>
         </Flex>
       </Stack>
@@ -88,23 +89,23 @@ export const getStaticProps = async ({ params: { slug } }) => {
     path.join('data/log/', slug + ".mdx")
   ).toString();
   const parsedMdx: matter.GrayMatterFile<string> = matter(mdxWithMetadata);
-  const htmlString: string = marked(parsedMdx.content)
-  const mdxSource = await renderToString(parsedMdx.content, {
-    components: MDXComponents,
-    mdxOptions: {
-      remarkPlugins: [
-        require('remark-autolink-headings'),
-        require('remark-slug'),
-        require('remark-code-titles')
-      ],
-    }
-  });
+  // const htmlString: string = marked(parsedMdx.content)
+  // const mdxSource = await renderToString(parsedMdx.content, {
+  //   components: MDXComponents,
+  //   mdxOptions: {
+  //     remarkPlugins: [
+  //       require('remark-autolink-headings'),
+  //       require('remark-slug'),
+  //       require('remark-code-titles')
+  //     ],
+  //   }
+  // });
 
   return {
     props: {
-      htmlString: htmlString,
+      // htmlString: htmlString,
       data: parsedMdx.data,
-      post: mdxSource
+      // post: mdxSource
     }
   }
 }
