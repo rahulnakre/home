@@ -16,7 +16,12 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 // import "remark-autolink-headings";
 // import "remark-slug";
 import { compile } from '@mdx-js/mdx'
-
+// import remark-autolink-headings from "remark-autolink-headings";
+// import('remark-slug'),
+// import('remark-code-titles')
+import remarkSlug from "remark-slug";
+import remarkCodeTitles from "remark-code-titles";
+import remarkAutolinkHeadings from "remark-autolink-headings";
 
 type PostProps = {
   // htmlString: any;
@@ -121,7 +126,14 @@ export const getStaticProps = async ({ params: { slug } }) => {
 
   const mdxSource = await serialize(mdxWithMetadata, { 
     parseFrontmatter: true,
-    mdxOptions: { development: false },
+    mdxOptions: { 
+      development: false,
+      remarkPlugins: [
+        remarkSlug,
+        remarkCodeTitles,
+        remarkAutolinkHeadings
+      ]
+    },
 
   })
 
