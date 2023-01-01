@@ -1,5 +1,5 @@
 import React from 'react';
-import NextLink from 'next/link';
+import Link from 'next/link';
 import { useColorMode, Button, Flex, Box, IconButton } from '@chakra-ui/react';
 import Footer from './Footer';
 import styled from '@emotion/styled';
@@ -56,21 +56,21 @@ const Container = ({ children }) => {
           onClick={toggleColorMode}
         />
         <Box>
-          <NextLink href="/" passHref>
-            <Button as="a" variant="ghost" p={[1, 4]}>
+          <Link href="/" passHref>
+            <Button variant="ghost" p={[1, 4]}>
               Home
             </Button>
-          </NextLink>
-          <NextLink href="/blog" passHref>
-            <Button as="a" variant="ghost" p={[1, 4]}>
+          </Link>
+          <Link href="/blog" passHref>
+            <Button variant="ghost" p={[1, 4]}>
               Blog
             </Button>
-          </NextLink>
-          <NextLink href="/log" passHref>
-            <Button as="a" variant="ghost" p={[1, 4]}>
+          </Link>
+          <Link href="/log" passHref>
+            <Button variant="ghost" p={[1, 4]}>
               Thoughts
             </Button>
-          </NextLink>
+          </Link>
         </Box>
       </StickyNav>
       <Flex
