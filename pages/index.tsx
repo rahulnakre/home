@@ -34,7 +34,7 @@ const Home:FC<HomeProps> = () => {
           </Heading>
           <br />
           <Text color={secondaryTextColor[colorMode]} variant='main'>
-            I’m a <Text as="mark">Software Engineer</Text> at <Text as="mark">AWS Identity</Text>, where I work on auth and get
+            I’m a <Text as="mark">Software Engineer</Text> at <Text as="mark">AWS</Text> in Toronto, where I work on auth and get
             to do many fun things.
           </Text>
           <br />

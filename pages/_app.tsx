@@ -11,7 +11,7 @@ const theme = extendTheme({
     Text: {
       variants: {
         'main': {
-          lineHeight: '2em',
+          // lineHeight: '2em',
           fontSize: '21px'
         }
       }
