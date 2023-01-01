@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Heading } from '@chakra-ui/react';
 
 const CustomLink = (props) => {
   const href = props.href;
@@ -15,8 +16,8 @@ const CustomLink = (props) => {
 
 const MDXComponents = {
   a: CustomLink,
-  h1: props => <h1 style={{fontSize: 50, fontWeight: 100}} {...props} />,
   br: props => <br {...props} />,
+  Heading: Heading
 };
 
 export default MDXComponents;
