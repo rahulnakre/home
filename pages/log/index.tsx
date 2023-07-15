@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
 
-  // posts.reverse();
+  posts.reverse();
 
   return {
     props: {
