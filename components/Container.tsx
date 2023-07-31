@@ -68,7 +68,7 @@ const Container = ({ children }) => {
           </Link>
           <Link href="/log" passHref>
             <Button variant="ghost" p={[1, 4]}>
-              Thoughts
+              Journal
             </Button>
           </Link>
         </Box>

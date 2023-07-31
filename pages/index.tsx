@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import Container from '../components/Container';
-import { useColorMode, Heading, Text, Flex, Stack } from '@chakra-ui/react';
+import { useColorMode, Heading, Text, Flex, Stack, ListItem, UnorderedList, Link } from '@chakra-ui/react';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 type HomeProps = {
 }
@@ -35,7 +36,7 @@ const Home:FC<HomeProps> = () => {
           <br />
           <Text color={secondaryTextColor[colorMode]} variant='main'>
             I’m a <Text as="mark">Software Engineer</Text> at <Text as="mark">AWS</Text> in Toronto, where I work on auth and get
-            to do many fun things.
+            to do many fun things. On the side, I like to write 
           </Text>
           <br />
           <Text color={secondaryTextColor[colorMode]} variant='main'>
@@ -55,7 +56,35 @@ const Home:FC<HomeProps> = () => {
             Feel free to reach out about whatever 🫣
           </Text>
         </Flex>
-
+        <Flex
+          flexDirection="column"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          maxWidth="700px"
+        >
+          <Heading>
+            Creative Writing
+          </Heading>
+          <br />
+          <Text color={secondaryTextColor[colorMode]} variant='main'>
+          A lil' collection of places I write in. It's been very soothing to write more, giving me a way to distill 
+          my thoughts into something more coherent. My next steps are to get better at world building and to write a short
+          story sometime in 2023.
+          </Text>
+          <br />
+          <UnorderedList>
+            <ListItem>
+              <Link href='https://rahulnakre.substack.com' isExternal>
+                Substack <ExternalLinkIcon mx='2px' />
+              </Link>
+              </ListItem>
+            <ListItem>
+              <Link href='https://www.openscreenplay.com/profile/rahul_n' isExternal>
+                OpenScreenplay Profile <ExternalLinkIcon mx='2px' />
+              </Link>
+            </ListItem>
+          </UnorderedList>
+        </Flex> 
         <Flex
           flexDirection="column"
           justifyContent="flex-start"
@@ -67,8 +96,10 @@ const Home:FC<HomeProps> = () => {
           </Heading>
           <br />
           <Text color={secondaryTextColor[colorMode]} variant='main'>
-          Currently working on my writing and pottery skills. My writing isn't where I want it to be, so I'm going to
-          try and fail on here in hopes of getting better :)
+          Earlier this year I spent a couple months learning pottery! Working with my hands fely very calming.
+          <br />
+          I've been less commital about this one but I've been fascinated with movie poster designs recently and 
+          I'm using it as an excuse to get better at Illustrator.
           </Text>
         </Flex>
       </Stack>

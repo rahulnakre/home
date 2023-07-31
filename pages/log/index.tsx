@@ -42,7 +42,7 @@ const Log:FC<LogProps> = (props) => {
           width="100%"
         >
           <Heading letterSpacing="tight" mb={2} as="h1" size="2xl">
-            Thoughts
+           Journal 
           </Heading>
           <Text color={secondaryTextColor[colorMode]}>
             Thought dump, for when I don't feel like organizing thoughts in a blog
